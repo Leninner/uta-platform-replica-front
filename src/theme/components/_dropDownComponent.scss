@@ -2,7 +2,7 @@
     @apply relative inline-block text-left;
 
     .dropdown-items {
-        @apply origin-top-right absolute left-0 mt-2 min-w-fit w-full rounded-md shadow-lg;
+        @apply origin-top-left absolute -left-20 mt-2 min-w-fit w-full rounded-md shadow-lg;
 
         &.items-primary {
             @apply ring-indigo-500 ring-opacity-5;

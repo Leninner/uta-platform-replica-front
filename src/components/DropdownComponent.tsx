@@ -21,6 +21,7 @@ export interface IDropdownComponentProps {
 export interface IDropdownOption {
   label: string
   value: string | number
+  icon?: keyof typeof SVG_ICONS
 }
 
 interface IDropdownStyles {
