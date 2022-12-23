@@ -104,11 +104,7 @@ const Icon = (props: IIConProps) => {
 
   return (
     <div className={backgroundStyles}>
-      <IconWrappedComponent
-        className={iconClassName}
-        iconName={iconName}
-        role="modal-icon"
-      />
+
     </div>
   )
 }

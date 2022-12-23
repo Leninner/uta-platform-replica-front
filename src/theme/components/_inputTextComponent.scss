@@ -1,5 +1,5 @@
 @mixin focus-primary {
-    @apply focus:ring-indigo-500 focus:border-indigo-500;
+    @apply focus:ring-slate-700 focus:border-slate-700;
 }
 
 @mixin focus-secondary {
@@ -11,7 +11,7 @@
 }
 
 @mixin border-primary {
-    @apply border-indigo-300;
+    @apply border-slate-200;
 }
 
 @mixin border-secondary {
@@ -24,7 +24,7 @@
 
 
 @mixin text-primary {
-    @apply text-indigo-300
+    @apply text-slate-800
 }
 
 @mixin text-secondary {
@@ -37,7 +37,7 @@
 
 .input-text-component {
     input {
-        @apply block w-full sm:text-sm rounded-md;
+        @apply block w-full sm:text-sm rounded-sm;
 
         &.input-primary {
             @include text-primary;

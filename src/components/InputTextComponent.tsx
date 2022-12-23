@@ -12,6 +12,7 @@ export interface IInputTextComponentProps {
   trailing?: string | number | ReactElement
   variant?: IInputVariants
   className?: string
+  type?: 'text' | 'password' | 'email' | 'number'
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -47,6 +48,7 @@ export const InputTextComponent = (props: IInputTextComponentProps) => {
     onChange,
     className,
     variant = 'primary',
+    type = 'text',
   } = props
 
   const getInputStyles = () => {
@@ -84,7 +86,7 @@ export const InputTextComponent = (props: IInputTextComponentProps) => {
           id={id}
           role="input"
           name={name}
-          type="text"
+          type={type}
           className={getInputStyles()}
           placeholder={placeholder}
           value={value}

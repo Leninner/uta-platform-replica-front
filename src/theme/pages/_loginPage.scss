@@ -1,0 +1,8 @@
+@mixin center {
+  @apply bg-gray-100;
+}
+
+.page-background {
+  @include center;
+  @apply flex flex-col items-center justify-center h-screen;
+}
