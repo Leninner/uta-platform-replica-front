@@ -3,6 +3,7 @@ import { SVG_ICONS } from '@/constants/icons'
 import { DropdownComponent, IDropdownOption } from '../components/DropdownComponent'
 import { IconWrappedComponent } from '../wrappers/IconWrappedComponent'
 import { useSelector } from 'react-redux'
+import { BellIcon, BookOpenIcon, CalendarIcon, FolderIcon, HomeIcon } from '@heroicons/react/solid'
 
 export type ILayoutVariant = 'primary' | 'secondary' | 'danger'
 export type IAlignActions = 'center' | 'start' | 'end' | 'around'
@@ -72,9 +73,7 @@ const options: IDropdownOption[] = [
 const firstMenu = (userInfo: any) => {
   return (
     <>
-      <span>campana</span>
-      <span>chat</span>
-      <span>lenguaje</span>
+      <BellIcon className="block h-6 w-6" aria-hidden="true" />
       <div className='flex gap-3'>
         <span>MAZABANDA PULLUTAXI LENIN GIOVANNI</span>
         <img src="https://sistemaseducaciononline.uta.edu.ec/pluginfile.php/28468/user/icon/adaptable/f1?rev=255709" alt="image" className='rounded-full w-7'/>
@@ -104,6 +103,29 @@ const firstMenu = (userInfo: any) => {
   )
 }
 
+const secondMenu = (userInfo: any) => {
+  return (
+    <section className='flex gap-6 text-white'>
+      <div className='flex gap-3 cursor-pointer'>
+        <HomeIcon className="block h-6 w-6" aria-hidden="true" />
+        <span>Inicio</span>
+      </div>
+      <div className='flex gap-3 cursor-pointer'>
+        <BookOpenIcon className="block h-6 w-6" aria-hidden="true" />
+        <span>Área personal</span>
+      </div>
+      <div className='flex gap-3 cursor-pointer'>
+        <CalendarIcon className="block h-6 w-6" aria-hidden="true" />
+        <span>Eventos</span>
+      </div>
+      <div className='flex gap-3 cursor-pointer'>
+        <FolderIcon className="block h-6 w-6" aria-hidden="true" />
+        <span>Mis cursos</span>
+      </div>
+    </section>
+  )
+}
+
 const Header = () => {
   const userInfo = useSelector((state: any) => state.user)
   return (
@@ -114,7 +136,9 @@ const Header = () => {
     <div className='bg-[#AD272E] h-28 p-2'>
       <img src="https://sistemaseducaciononline.uta.edu.ec/pluginfile.php/1/theme_adaptable/logo/1670274806/sistemas.png" alt="" className='h-24'/>
     </div>
-    <div className='p-2 bg-[#333] border-b-4 border-[#AD272E]'> hey hi</div>
+    <div className='p-2 bg-[#333] border-b-4 border-[#AD272E]'>
+      {secondMenu(userInfo)}
+    </div>
   </header>
   )
   }
