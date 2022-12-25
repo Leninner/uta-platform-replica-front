@@ -4,6 +4,7 @@ import { InputTextComponent } from "@/components/InputTextComponent"
 import { ButtonComponent } from '@/components/ButtonComponent'
 import { useState } from 'react'
 import { PageLayout } from '../../layouts/PageLayout'
+import { useLoginMutation } from '../../store/api/loginApi'
 
 const Login: NextPage = () => {
   const [loginInfo, setLoginInfo] = useState({
@@ -11,10 +12,26 @@ const Login: NextPage = () => {
     passwordLabel: '',
   })
 
+  const [login, loginResult] = useLoginMutation()
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setLoginInfo({ ...loginInfo, [name]: value })
   }
+
+  const handleLogin = async () => {
+    try {
+      await login({
+        email: loginInfo.emailLabel,
+        password: loginInfo.passwordLabel,
+      })
+     
+      console.log('resultAction', loginResult)
+    } catch (err) {
+      console.error('Failed to login: ', err)
+    }
+  }
+
     
   return (
     <PageLayout>
@@ -47,6 +64,7 @@ const Login: NextPage = () => {
               e.preventDefault()
               console.log('login')
               console.log(loginInfo)
+              handleLogin()
             }}
             extraClasses="duration-300 ease-in-out justify-center"
             size='extra-large'

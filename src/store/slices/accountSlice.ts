@@ -2,10 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface IUserInformation {
   id: number
-  firstName: string
-  lastName: string
-  username: string
+  image: string
+  address: string
+  phoneNumber: string
+  province: string
+  city: string
+  name: string
   email: string
+  rol: 'ADMIN' | 'STUDENT' | 'TEACHER'
 }
 
 export interface IAccountState {
@@ -17,10 +21,14 @@ export interface IAccountState {
 
 const initialAccountUser: IUserInformation = {
   id: 0,
-  firstName: '',
-  lastName: '',
-  username: '',
+  name: '',
   email: '',
+  image: '',
+  address: '',
+  phoneNumber: '',
+  province: '',
+  city: '',
+  rol: 'STUDENT',
 }
 
 export const initialAccountState: IAccountState = {

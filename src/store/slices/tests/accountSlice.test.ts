@@ -8,10 +8,14 @@ const defaultState = {
   account: {
     user: {
       id: 0,
-      firstName: '',
-      lastName: '',
-      username: '',
+      name: '',
       email: '',
+      image: '',
+      address: '',
+      phoneNumber: '',
+      province: '',
+      city: '',
+      rol: 'STUDENT',
     },
     token: '',
   },
