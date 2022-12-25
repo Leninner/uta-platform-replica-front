@@ -4,5 +4,5 @@ import { IRootState } from '../store'
 
 export const getUserAccountSelector = createSelector(
   (state: IRootState) => state.account,
-  (account) => account.user
+  (account) => account.user,
 )

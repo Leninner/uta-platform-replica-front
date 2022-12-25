@@ -20,9 +20,9 @@ export const validAccessToRoute = (
   path: string,
 ) => {
   let haveAccess = false
-  appNavigation.forEach((nav) => {
-    if (path === nav.href) {
-      const navMain = nav
+  Object.keys(appNavigation).forEach((nav) => {
+    if (path === appNavigation[nav].href) {
+      const navMain = appNavigation[nav]
       const accessByRol =
         !navMain.roleControl ||
         navMain.roleControl.every((itemRole) => userRole?.includes(itemRole))

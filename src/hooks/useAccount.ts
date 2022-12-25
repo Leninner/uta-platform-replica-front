@@ -6,18 +6,20 @@ import { validAccessToRoute } from '../utils/validAccessToRoute'
 export const useAccount = () => {
   const router = useRouter()
   const account = useSelector(
-    (state: IRootState) => state.account.account
+    (state: IRootState) => state.account
   )
   const haveAccessToRoute = validAccessToRoute(
-    [account?.user?.rol] || [],
+    [account?.account?.user?.rol] || [],
     router.pathname,
   )
 
+  console.log('account', account)
+
   return {
-    isLoggedIn: !!account.token,
-    haveRoles: !!account?.user?.rol,
-    userRoles: account?.user?.rol,
+    isLoggedIn: !!account.account.token,
+    haveRoles: !!account.account?.user?.rol,
+    userRoles: account.account?.user?.rol,
     haveAccessToRoute,
-    user: account.user,
+    user: account.account.user,
   }
 }

@@ -7,6 +7,9 @@ import { BellIcon, BookOpenIcon, CalendarIcon, FolderIcon, HomeIcon } from '@her
 import { useAccount } from '../hooks/useAccount'
 import { useRouter } from 'next/router'
 import { IRootState } from '../store/store'
+import { useCheckAccess } from '../hooks/useCheckAccess'
+import { useAppDispatch } from '../store/hooks'
+import { logout } from '../store/slices/accountSlice'
 
 export type ILayoutVariant = 'primary' | 'secondary' | 'danger'
 export type IAlignActions = 'center' | 'start' | 'end' | 'around'
@@ -74,6 +77,25 @@ const options: IDropdownOption[] = [
 ]
 
 const firstMenu = (userInfo: any) => {
+  const dispatch = useAppDispatch()
+
+  const processByOption = (option: IDropdownOption) => {
+    switch (option.value) {
+      case 1:
+        console.log('option 1')
+        break
+      case 2:
+        console.log('option 2')
+        break
+      case 3:
+        console.log('option 3')
+        dispatch(logout())
+        break
+      default:
+        break
+    }
+  }
+
   return (
     <>
       <BellIcon className="block h-6 w-6" aria-hidden="true" />
@@ -83,7 +105,7 @@ const firstMenu = (userInfo: any) => {
       </div>
       <DropdownComponent
                 value={1}
-                onChange={() => null}
+                onChange={(option) => processByOption(option)}
                 options={options}
                 placeholder="pick an option"
                 iconHeader="CHEVRON_DOWN"
@@ -140,17 +162,17 @@ const Header = () => {
   const userInfo = useSelector((state: IRootState) => state.account.account.user)
 
   return (
-  <header>
-    <div className='p-2 bg-[#333] border-b border-white flex justify-end text-white gap-4'>
-      {firstMenu(userInfo)}
-    </div>
-    <div className='bg-[#AD272E] h-28 p-2'>
-      <img src="https://sistemaseducaciononline.uta.edu.ec/pluginfile.php/1/theme_adaptable/logo/1670274806/sistemas.png" alt="" className='h-24'/>
-    </div>
-    <div className='p-2 bg-[#333] border-b-4 border-[#AD272E]'>
-      {secondMenu(userInfo)}
-    </div>
-  </header>
+    <header>
+      <div className='p-2 bg-[#333] border-b border-white flex justify-end text-white gap-4'>
+        {firstMenu(userInfo)}
+      </div>
+      <div className='bg-[#AD272E] h-28 p-2'>
+        <img src="https://sistemaseducaciononline.uta.edu.ec/pluginfile.php/1/theme_adaptable/logo/1670274806/sistemas.png" alt="" className='h-24'/>
+      </div>
+      <div className='p-2 bg-[#333] border-b-4 border-[#AD272E]'>
+        {secondMenu(userInfo)}
+      </div>
+    </header>
   )
   }
 

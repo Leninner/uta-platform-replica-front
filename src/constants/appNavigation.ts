@@ -10,44 +10,23 @@ export interface IAppNavigationItem {
   icon?: string
 }
 
-export interface IAppNavigation extends IAppNavigationItem {
-  child?: IAppNavigationItem[]
+export interface IAppNavigation {
+  [key: string]: IAppNavigationItem
 }
 
-export const appNavigation: IAppNavigation[] = [
-  {
-    name: "Dashboard",
-    title: "Dashboard",
-    href: "/courses",
+export const appNavigation: IAppNavigation = {
+  login: {
+    name: "login",
+    title: "Login",
+    href: "/login",
+    urlReference: "/login",
     roleControl: ["ADMIN", "STUDENT", "TEACHER"],
-    icon: "dashboard",
-  },
-  {
-    name: "Courses",
-    title: "Courses",
+  }, 
+  courses: {
+    name: "courses",
+    title: "Cursos",
     href: "/courses",
+    urlReference: "/courses",
     roleControl: ["ADMIN", "STUDENT", "TEACHER"],
-    icon: "book",
-  },
-  {
-    name: "Students",
-    title: "Students",
-    href: "/students",
-    roleControl: ["ADMIN"],
-    icon: "users",
-  },
-  {
-    name: "Teachers",
-    title: "Teachers",
-    href: "/teachers",
-    roleControl: ["ADMIN"],
-    icon: "users",
-  },
-  {
-    name: "Settings",
-    title: "Settings",
-    href: "/settings",
-    roleControl: ["ADMIN"],
-    icon: "settings",
-  },
-]
+  }
+}

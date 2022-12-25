@@ -7,8 +7,11 @@ import { PageLayout } from '../../layouts/PageLayout'
 import { useLoginMutation } from '../../store/api/loginApi'
 import { useAccount } from '../../hooks/useAccount'
 import { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
+import { setAccountToken, setAccountUser } from '../../store/slices/accountSlice'
 
 const Login: NextPage = () => {
+  const dispatch = useDispatch()
   const route = useRouter()
   const {isLoggedIn} = useAccount()
   const [loginInfo, setLoginInfo] = useState({
@@ -23,14 +26,19 @@ const Login: NextPage = () => {
     setLoginInfo({ ...loginInfo, [name]: value })
   }
 
+  useEffect(()=> {
+    console.log('loginResult', loginResult)
+    if(!loginResult.data?.token) return
+    dispatch(setAccountToken(loginResult.data?.token))
+    dispatch(setAccountUser(loginResult.data?.user))
+  }, [loginResult])
+
   const handleLogin = async () => {
     try {
       await login({
         email: loginInfo.emailLabel,
         password: loginInfo.passwordLabel,
       })
-     
-      console.log('resultAction', loginResult)
     } catch (err) {
       console.error('Failed to login: ', err)
     }
@@ -38,7 +46,7 @@ const Login: NextPage = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      route.push('/dashboard')
+      route.replace('/courses')
     }
   }, [isLoggedIn])
 

@@ -33,9 +33,9 @@ const initialAccountUser: IUserInformation = {
 
 export const initialAccountState: IAccountState = {
   account: {
-    user: initialAccountUser,
     token: '',
-  },
+    user: initialAccountUser,
+  }
 }
 
 export const accountSlice = createSlice({
