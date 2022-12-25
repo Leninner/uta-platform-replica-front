@@ -2,11 +2,15 @@ import type { NextPage } from 'next'
 
 import { InputTextComponent } from "@/components/InputTextComponent"
 import { ButtonComponent } from '@/components/ButtonComponent'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PageLayout } from '../../layouts/PageLayout'
 import { useLoginMutation } from '../../store/api/loginApi'
+import { useAccount } from '../../hooks/useAccount'
+import { useRouter } from 'next/router'
 
 const Login: NextPage = () => {
+  const route = useRouter()
+  const {isLoggedIn} = useAccount()
   const [loginInfo, setLoginInfo] = useState({
     emailLabel: '',
     passwordLabel: '',
@@ -32,7 +36,12 @@ const Login: NextPage = () => {
     }
   }
 
-    
+  useEffect(() => {
+    if (isLoggedIn) {
+      route.push('/dashboard')
+    }
+  }, [isLoggedIn])
+
   return (
     <PageLayout>
       <PageLayout.Title 

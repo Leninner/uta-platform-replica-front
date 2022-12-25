@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SVG_ICONS } from '@/constants/icons'
 import { DropdownComponent, IDropdownOption } from '../components/DropdownComponent'
 import { IconWrappedComponent } from '../wrappers/IconWrappedComponent'
 import { useSelector } from 'react-redux'
 import { BellIcon, BookOpenIcon, CalendarIcon, FolderIcon, HomeIcon } from '@heroicons/react/solid'
+import { useAccount } from '../hooks/useAccount'
+import { useRouter } from 'next/router'
+import { IRootState } from '../store/store'
 
 export type ILayoutVariant = 'primary' | 'secondary' | 'danger'
 export type IAlignActions = 'center' | 'start' | 'end' | 'around'
@@ -75,7 +78,7 @@ const firstMenu = (userInfo: any) => {
     <>
       <BellIcon className="block h-6 w-6" aria-hidden="true" />
       <div className='flex gap-3'>
-        <span>MAZABANDA PULLUTAXI LENIN GIOVANNI</span>
+        <span>{userInfo.name}</span>
         <img src="https://sistemaseducaciononline.uta.edu.ec/pluginfile.php/28468/user/icon/adaptable/f1?rev=255709" alt="image" className='rounded-full w-7'/>
       </div>
       <DropdownComponent
@@ -127,7 +130,15 @@ const secondMenu = (userInfo: any) => {
 }
 
 const Header = () => {
-  const userInfo = useSelector((state: any) => state.user)
+  const router = useRouter()
+  const { isLoggedIn } = useAccount()
+
+  useEffect(() => {
+    if(!isLoggedIn) router.push('/login')
+  }, [isLoggedIn])
+
+  const userInfo = useSelector((state: IRootState) => state.account.account.user)
+
   return (
   <header>
     <div className='p-2 bg-[#333] border-b border-white flex justify-end text-white gap-4'>
