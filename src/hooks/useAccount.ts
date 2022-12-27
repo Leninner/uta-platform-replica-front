@@ -12,9 +12,7 @@ export const useAccount = () => {
     [account?.account?.user?.rol] || [],
     router.pathname,
   )
-
-  console.log('account', account)
-
+  
   return {
     isLoggedIn: !!account.account.token,
     haveRoles: !!account.account?.user?.rol,

@@ -13,6 +13,7 @@ export interface IInputTextComponentProps {
   variant?: IInputVariants
   className?: string
   type?: 'text' | 'password' | 'email' | 'number'
+  showErrors?: boolean
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -49,6 +50,7 @@ export const InputTextComponent = (props: IInputTextComponentProps) => {
     className,
     variant = 'primary',
     type = 'text',
+    showErrors = false,
   } = props
 
   const getInputStyles = () => {
@@ -66,13 +68,17 @@ export const InputTextComponent = (props: IInputTextComponentProps) => {
       inputStyles = inputStyles.concat(` ${className}`)
     }
 
+    if (showErrors) {
+      inputStyles = inputStyles.concat(' error')
+    }
+
     return inputStyles
   }
 
   return (
-    <div className="input-text-component">
+    <div className='input-text-component'>
       {labelText && (
-        <label htmlFor={name} className={variantClasses[variant].labelStyles}>
+        <label htmlFor={name} className={`${!showErrors ? variantClasses[variant].labelStyles : 'text-red-500'}`}>
           {labelText}
         </label>
       )}

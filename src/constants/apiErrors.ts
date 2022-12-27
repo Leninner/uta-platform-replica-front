@@ -2,6 +2,7 @@ export const API_ERRORS = {
   ERROR_404: 'Solicitud Inválida',
   ERROR_500: 'Error interno',
   ERROR_401: 'No tiene permisos para esta petición',
+  ERROR_400: 'Datos inválidos',
 }
 
 export const DISPLAY_TIME = 5000
@@ -13,4 +14,5 @@ export const HTTP_RESPONSE_CODE = {
   ERROR_500: 500,
   SUCCESS_200: 200,
   SUCCESS_300: 300,
+  BAD_REQUEST_400: 400,
 }

@@ -7,19 +7,23 @@ import { PageLayout } from '../../layouts/PageLayout'
 import { useLoginMutation } from '../../store/api/loginApi'
 import { useAccount } from '../../hooks/useAccount'
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
 import { setAccountToken, setAccountUser } from '../../store/slices/accountSlice'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 
 const Login: NextPage = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const route = useRouter()
   const {isLoggedIn} = useAccount()
+  const [login, loginResult] = useLoginMutation()
   const [loginInfo, setLoginInfo] = useState({
     emailLabel: '',
     passwordLabel: '',
   })
+  const alertLists = useAppSelector((state) => state.alerts.alertList)
+  const loader = useAppSelector((state) => state.loader.loader)
 
-  const [login, loginResult] = useLoginMutation()
+  console.log({alertLists, loader, loginResult})
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -27,7 +31,6 @@ const Login: NextPage = () => {
   }
 
   useEffect(()=> {
-    console.log('loginResult', loginResult)
     if(!loginResult.data?.token) return
     dispatch(setAccountToken(loginResult.data?.token))
     dispatch(setAccountUser(loginResult.data?.user))
@@ -67,6 +70,7 @@ const Login: NextPage = () => {
             labelText='Email'
             onChange={handleChange}
             type="email"
+            showErrors={loginResult.error?.data?.message ? true : false}
           />
           <InputTextComponent
             id="passwordLabel"
@@ -75,22 +79,21 @@ const Login: NextPage = () => {
             labelText='Password'
             onChange={handleChange}
             type="password"
+            showErrors={loginResult.error?.data?.message ? true  : false}
           />
 
           <ButtonComponent variant="primary" onClick={(e) => {
               e.preventDefault()
-              console.log('login')
-              console.log(loginInfo)
               handleLogin()
             }}
             extraClasses="duration-300 ease-in-out justify-center"
             size='extra-large'
+            disabled={loginResult.isLoading}
           >
             Login
           </ButtonComponent>
           <ButtonComponent onClick={(e) => {
               e.preventDefault()
-              console.log('login as guest')
             }} 
             variant="primary" 
             extraClasses='duration-300 ease-in-out justify-center'
@@ -98,6 +101,17 @@ const Login: NextPage = () => {
           >
             Login as Guest
           </ButtonComponent>
+          <ul>
+            {
+              alertLists.map((alert, index) => {
+                return (
+                  <li key={index}>
+                    {alert.value} {alert.title}
+                  </li>
+                )
+              })
+            }
+          </ul>
         </form>
       </PageLayout.Body>
       <PageLayout.Footer>

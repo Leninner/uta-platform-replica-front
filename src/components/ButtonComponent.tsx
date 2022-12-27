@@ -23,6 +23,7 @@ export interface IButtonComponentProps {
   onSubmit?: (e: React.FormEvent<HTMLElement>) => void
   isAnchorButton?: boolean
   href?: string
+  disabled?: boolean
 }
 
 const classShapeIcon = {
@@ -41,6 +42,7 @@ export const ButtonComponent = (props: IButtonComponentProps) => {
     children,
     isAnchorButton,
     href,
+    disabled,
     onClick,
     onSubmit,
   } = props
@@ -57,6 +59,7 @@ export const ButtonComponent = (props: IButtonComponentProps) => {
     className,
     onClick,
     onSubmit,
+    disabled
   }
 
   const buttonContent = (

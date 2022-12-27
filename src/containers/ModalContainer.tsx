@@ -98,7 +98,7 @@ export const ModalContainer = () => {
                       <span className="sr-only">Close</span>
                       <IconWrappedComponent
                         className="h-6 w-6"
-                        iconName="X_ICON"
+                        icon="X_ICON"
                       />
                     </button>
                   </div>

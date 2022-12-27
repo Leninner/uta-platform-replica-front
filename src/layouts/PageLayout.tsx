@@ -1,10 +1,5 @@
 import React from 'react'
-
-import { useDispatch } from 'react-redux'
-
 import { SVG_ICONS } from '@/constants/icons'
-import { ButtonComponent } from '@/components/ButtonComponent'
-import { closeModal } from '@/store/slices/modalSlice'
 
 export type ILayoutVariant = 'primary' | 'secondary' | 'danger'
 export type IAlignActions = 'center' | 'start' | 'end' | 'around'

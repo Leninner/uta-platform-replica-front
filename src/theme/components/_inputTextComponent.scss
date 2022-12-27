@@ -56,6 +56,10 @@
             @include border-danger;
             @include focus-danger;
         }
+
+        &.error {
+            @apply border-red-500;
+        }
     }
     label {
         @apply block text-sm font-medium;

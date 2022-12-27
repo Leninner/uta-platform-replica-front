@@ -83,7 +83,7 @@ export const axiosBaseQuery =
     api
   ) => {
     const state = api.getState() as IRootState
-    const token = state?.account?.user?.token
+    const token = state?.account.account?.token
     const urlPath = url(state)
     const requestReference = `${new Date().getTime()}/${urlPath}-${method}`
 

@@ -88,7 +88,6 @@ const firstMenu = (userInfo: any) => {
         console.log('option 2')
         break
       case 3:
-        console.log('option 3')
         dispatch(logout())
         break
       default:
