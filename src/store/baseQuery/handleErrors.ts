@@ -108,7 +108,7 @@ export const handleErrors = ({
     errorMessage,
   })
 
-  const ALERT_ACTIVE_TIME = 5000
+  const ALERT_ACTIVE_TIME = 3000
   setTimeout(() => {
     dispatchErrorMessage({
       errorStatus: errors?.response?.status,

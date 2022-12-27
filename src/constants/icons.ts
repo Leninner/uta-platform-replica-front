@@ -5,4 +5,5 @@ export const SVG_ICONS = {
   CHEVRON_DOWN: HeroIcons.ChevronDownIcon,
   EXCLAMATION: HeroIcons.ExclamationIcon,
   X_ICON: HeroIcons.XIcon,
+  DANGER: HeroIcons.ShieldExclamationIcon,
 }

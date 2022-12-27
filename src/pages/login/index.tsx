@@ -9,6 +9,7 @@ import { useAccount } from '../../hooks/useAccount'
 import { useRouter } from 'next/router'
 import { setAccountToken, setAccountUser } from '../../store/slices/accountSlice'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { AlertComponent } from '../../components/AlertComponent'
 
 const Login: NextPage = () => {
   const dispatch = useAppDispatch()
@@ -101,17 +102,15 @@ const Login: NextPage = () => {
           >
             Login as Guest
           </ButtonComponent>
-          <ul>
+          <>
             {
               alertLists.map((alert, index) => {
                 return (
-                  <li key={index}>
-                    {alert.value} {alert.title}
-                  </li>
+                  <AlertComponent message={alert.title ?? ''} type='DANGER' key={index} icon={'EXCLAMATION'} alert={alert}/>
                 )
               })
             }
-          </ul>
+          </>
         </form>
       </PageLayout.Body>
       <PageLayout.Footer>
