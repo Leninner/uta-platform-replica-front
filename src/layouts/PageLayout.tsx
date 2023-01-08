@@ -11,11 +11,8 @@ const PageLayoutHOC = (props: PageLayoutProps) => (
 )
 
 interface ITitleProps {
-  title: string
-  subTitle?: string
-  className?: string
   headerAlignment?: 'center' | 'start' | 'end'
-  isLoginPage?: boolean
+  children?: React.ReactNode
 }
 
 interface IBodyProps {
@@ -51,19 +48,8 @@ const headerAlignments = {
 }
 
 const Title = ({headerAlignment = 'start', ...props}: ITitleProps) => (
-  <header className={headerAlignments[headerAlignment]}>
-    {props.isLoginPage && (
-      <img src="https://sistemaseducaciononline.uta.edu.ec/pluginfile.php/1/theme_adaptable/adaptablemarkettingimages/0/logo-uta.png" alt="some" className='w-40'/>
-    )}
-    <div className='flex items-center flex-col'>
-      <h3 className={`text-3xl leading-6 font-medium text-gray-900 ${props.className}`}>{props.title}</h3>
-      {props.subTitle && (
-        <p className="mt-1 max-w-2xl text-md text-gray-900">{props.subTitle}</p>
-      )}
-    </div>
-    {props.isLoginPage && (
-      <img src="https://sistemaseducaciononline.uta.edu.ec/pluginfile.php/1/theme_adaptable/adaptablemarkettingimages/0/sistemas.png" alt="some" className='w-40'/>
-    )}
+  <header className={`${headerAlignments[headerAlignment]}`}>
+    {props.children}
   </header>
 )
 

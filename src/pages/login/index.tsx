@@ -7,6 +7,7 @@ import { PageLayout } from '../../layouts/PageLayout'
 import { useLoginMutation } from '../../store/api/loginApi'
 import { setAccountToken, setAccountUser } from '../../store/slices/accountSlice'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import Head from 'next/head'
 
 const Login: NextPage = () => {
   const dispatch = useAppDispatch()
@@ -35,60 +36,68 @@ const Login: NextPage = () => {
   }
 
   return (
-    <PageLayout>
-      <PageLayout.Title
-        title="PLATAFORMA EDUCATIVA INSTITUCIONAL"
-        subTitle="FACULTAD DE INGENIERÍA EN SISTEMAS, ELECTRÓNICA E INDUSTRIAL"
-        headerAlignment='center'
-        isLoginPage={true}
-      />
-      <PageLayout.Body>
-        <form action="" className="p-12 flex flex-col gap-4 w-1/2 m-auto">
-          <InputTextComponent
-            id="emailLabel"
-            name="emailLabel"
-            placeholder="foo@example.com"
-            labelText='Email'
-            onChange={handleChange}
-            type="email"
-            showErrors={loginResult.error?.data?.message ? true : false}
-          />
-          <InputTextComponent
-            id="passwordLabel"
-            name="passwordLabel"
-            placeholder="**********"
-            labelText='Password'
-            onChange={handleChange}
-            type="password"
-            showErrors={loginResult.error?.data?.message ? true : false}
-          />
+    <>
+      <Head>
+        <title>Facultad de Ingeniería en Sistemas, Electrónica e Industrial</title>
+      </Head>
+      <PageLayout>
+        <PageLayout.Title
+          headerAlignment='center'
+        >
+          <img src="https://sistemaseducaciononline.uta.edu.ec/pluginfile.php/1/theme_adaptable/adaptablemarkettingimages/0/logo-uta.png" alt="some" className='w-40' />
+          <div className='flex items-center flex-col mx-5 max-w-lg justify-center text-center'>
+            <h1 className={`text-3xl line font-medium text-gray-900`}>PLATAFORMA EDUCATIVA INSTITUCIONAL</h1>
+            <p className="mt-1 max-w-2xl font-medium text-md text-gray-900">FACULTAD DE INGENIERÍA EN SISTEMAS, ELECTRÓNICA E INDUSTRIAL</p>
+          </div>
+          <img src="https://sistemaseducaciononline.uta.edu.ec/pluginfile.php/1/theme_adaptable/adaptablemarkettingimages/0/sistemas.png" alt="some" className='w-40' />
+        </PageLayout.Title>
+        <PageLayout.Body>
+          <form action="" className="p-12 flex flex-col gap-4 w-1/2 m-auto">
+            <InputTextComponent
+              id="emailLabel"
+              name="emailLabel"
+              placeholder="foo@example.com"
+              labelText='Correo electrónico:'
+              onChange={handleChange}
+              type="email"
+              showErrors={loginResult.error?.data?.message ? true : false}
+            />
+            <InputTextComponent
+              id="passwordLabel"
+              name="passwordLabel"
+              placeholder="**********"
+              labelText='Contraseña:'
+              onChange={handleChange}
+              type="password"
+              showErrors={loginResult.error?.data?.message ? true : false}
+            />
 
-          <ButtonComponent variant="primary" onClick={(e) => {
-            e.preventDefault()
-            handleLogin()
-          }}
-            extraClasses="duration-300 ease-in-out justify-center"
-            size='extra-large'
-            disabled={loginResult.isLoading}
-          >
-            Login
-          </ButtonComponent>
-          <ButtonComponent onClick={(e) => {
-            e.preventDefault()
-          }}
-            variant="primary"
-            extraClasses='duration-300 ease-in-out justify-center'
-            size='extra-large'
-          >
-            Login as Guest
-          </ButtonComponent>
-        </form>
-      </PageLayout.Body>
-      <PageLayout.Footer>
-        <img src="https://auditoriaeducaciononline.uta.edu.ec/pluginfile.php/1/theme_adaptable/adaptablemarkettingimages/0/01_accesoplataforma.png" alt="video" className='w-1/2 px-12' />
-      </PageLayout.Footer>
-    </PageLayout>
-
+            <ButtonComponent variant="primary" onClick={(e) => {
+              e.preventDefault()
+              handleLogin()
+            }}
+              extraClasses="duration-300 ease-in-out justify-center"
+              size='extra-large'
+              disabled={loginResult.isLoading}
+            >
+              Iniciar Sesión
+            </ButtonComponent>
+            <ButtonComponent onClick={(e) => {
+              e.preventDefault()
+            }}
+              variant="primary"
+              extraClasses='duration-300 ease-in-out justify-center'
+              size='extra-large'
+            >
+              Iniciar sesión como invitado
+            </ButtonComponent>
+          </form>
+        </PageLayout.Body>
+        <PageLayout.Footer>
+          <img src="https://auditoriaeducaciononline.uta.edu.ec/pluginfile.php/1/theme_adaptable/adaptablemarkettingimages/0/01_accesoplataforma.png" alt="video" className='w-1/2 px-12' />
+        </PageLayout.Footer>
+      </PageLayout>
+    </>
   )
 }
 
