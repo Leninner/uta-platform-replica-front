@@ -1,30 +1,13 @@
-$sidenav-width: 200px;
-$sidenav-width-big:342px;
-
 .sidenav {
-  width: $sidenav-width;
+  @apply flex-1 h-full relative top-0 left-0 z-50 p-9;
    &.big{
-    width: $sidenav-width-big;
+    @apply w-[342px];
    }
-  background-color: color("primary", "lighten-3");
-  height: 100vh;
-  position: relative;
   .menu-toggle {
     display: none;
   }
-  .brand {
-    height: 70px;
-    padding: 0.5rem 1.5rem;
-    .brand-item {
-      width: 100%;
-      height: 100%;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-    }
-  }
   .navigation {
-    padding-top: 10%;
+    // padding-top: 10%;
     ul {
       margin: 0;
       padding: 0;
@@ -109,34 +92,6 @@ $sidenav-width-big:342px;
       margin-right: 10px;
       align-items: center;
       justify-content: center;
-    }
-  }
-  .profile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 24px;
-    .profile-image {
-      width: 64px;
-      height: 64px;
-      bottom: 56px;
-      background: #ffffff;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      img {
-        width: 48px;
-        width: 48px;
-      }
-    }
-    .username {
-      font-size: 16px;
-      margin-bottom: 16px;
-    }
-    .company {
-      font-size: 12px;
-      padding-bottom: 0px;
     }
   }
 }

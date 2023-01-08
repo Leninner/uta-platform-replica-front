@@ -2,6 +2,7 @@ import React, { memo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { IAppNavigationItem } from '../constants/appNavigation'
 import { useAccount } from '../hooks/useAccount'
+import { PagingBar } from '../components/PagingBar'
 
 const SideNav = () => {
   const router = useRouter()
@@ -22,8 +23,6 @@ const SideNav = () => {
     'sidenav',
     'display-flex',
     'flex-column',
-    activeNav ? 'active-header' : '',
-    pathName.includes('bi-vehicle-intelligence') ? 'big' : '',
   ].join(' ')
 
   return (
@@ -34,10 +33,11 @@ const SideNav = () => {
       >
         <SvgImport icon={icons.MENU} className="icon-24x" />
       </div> */}
-      <div className="flex-1">
+      <div>
         <nav className="navigation height-100 flex-row">
           <ul className="width-100">
             <li>
+              <PagingBar labelText="Navegación" />
               pepe
             </li>
             <li>

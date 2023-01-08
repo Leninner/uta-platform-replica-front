@@ -30,7 +30,7 @@ const MainLayoutHOC = (props: MainLayoutProps) => {
           <DashboardLayout.Header />
           <DashboardLayout.Body>
             <SideNav />
-            <section>
+            <section className='max-w-[75%] p-9'>
               {props.children}
             </section>
           </DashboardLayout.Body>

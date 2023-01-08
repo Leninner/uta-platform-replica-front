@@ -1,12 +1,10 @@
-import Head from 'next/head'
 import { useEffect } from 'react'
-import { PagingBar } from '../../components/PagingBar'
 import { CourseListView } from '../../layouts/CourseListView'
 import { useGetCoursesQuery } from '../../store/api/coursesApi'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { setCourses } from '../../store/slices/coursesSlice'
 
-const Courses = () => {
+const CourseDetail = () => {
   const dispatch = useAppDispatch()
   const courses = useAppSelector(state => state.courses.courses)
   const { token, user: { rol, id } } = useAppSelector(state => state.account.account)
@@ -23,16 +21,13 @@ const Courses = () => {
   }, [data])
 
   return (
-    <section className='flex flex-col gap-10'>
-      <Head>
-        <title>Área personal</title>
-      </Head>
-      <div>
-        <PagingBar labelText="Vista general del curso" />
-        <CourseListView courses={courses} />
-      </div>
-    </section>
+    <>
+      <span>Cursos a los que se ha accedido recientemente</span>
+      <CourseListView courses={courses} />
+      <span>Vista general del curso</span>
+      <CourseListView courses={courses} />
+    </>
   )
 }
 
-export default Courses
+export default CourseDetail
