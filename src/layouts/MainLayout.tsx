@@ -3,7 +3,6 @@ import { AlertComponent } from '../components/AlertComponent'
 import { useAccount } from '../hooks/useAccount'
 import { useCheckAccess } from '../hooks/useCheckAccess'
 import { useRoute } from '../hooks/useRoute'
-import { useAppSelector } from '../store/hooks'
 import AlertsView from './AlertsView'
 import LoaderView from './LoaderView'
 
@@ -13,8 +12,7 @@ export interface MainLayoutProps {
   children: React.ReactNode
 }
 const MainLayoutHOC = (props: MainLayoutProps) => {
-  const { isLoading } = useCheckAccess()
-  const { redirectToLoginPage, redirectToInitialPage, is404Page } = useRoute()
+  const { redirectToLoginPage, redirectToInitialPage } = useRoute()
   const { isLoggedIn } = useAccount()
 
   useEffect(() => {
@@ -25,21 +23,12 @@ const MainLayoutHOC = (props: MainLayoutProps) => {
     }
   }, [isLoggedIn])
 
-  return isLoading ? (
-    isLoggedIn && !is404Page ? (
+  return (
     <main>
-      {props.children}  
+      {props.children}
       <AlertsView />
+      <LoaderView />
     </main>
-    ) :
-    (
-      <main>
-        {props.children}
-        <AlertsView />
-      </main>
-    )
-  ) : (
-    <LoaderView />
   )
 }
 

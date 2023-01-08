@@ -1,24 +1,21 @@
 import * as React from 'react'
-import { CSSTransition } from 'react-transition-group'
 import { useAppSelector } from '../store/hooks'
 
 
 const LoaderView = () => {
   const loadingList = useAppSelector((state) => state.loader.loader)
 
+  console.log({loadingList})
+
   return (
-    <CSSTransition
-      in={!!loadingList.length}
-      timeout={300}
-      classNames="alert"
-      unmountOnExit={true}
-    >
-      <div className="loader-view">
-        <div>
-          leninner
-        </div>
-      </div>
-    </CSSTransition>
+    <>
+      {
+        loadingList?.length > 0 && (
+          <div className="loader-view">
+            <div className='spin' />
+          </div>)
+      }
+    </>
   )
 }
 
