@@ -2,7 +2,7 @@
   @apply absolute top-0 right-0 p-4;
   
   .content {
-    @apply flex flex-col items-center justify-between rounded shadow-md shadow-gray-700 relative;
+    @apply flex flex-col items-center justify-between bg-white rounded shadow-md shadow-gray-700 relative;
 
     .message {
       @apply text-gray-700 px-14 py-4 flex items-center justify-center flex-col;

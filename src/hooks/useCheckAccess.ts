@@ -4,7 +4,6 @@ import { useRoute } from './useRoute'
 
 export const useCheckAccess = (): { isLoading: boolean } => {
   const {
-    isLoginRoute,
     redirectToLoginPage,
     currentRoute,
   } = useRoute()
@@ -12,7 +11,7 @@ export const useCheckAccess = (): { isLoading: boolean } => {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (!isLoggedIn && !isLoginRoute) {
+    if ( !isLoggedIn) {
       redirectToLoginPage().then(() => setLoading(true))
     } else {
       setLoading(true)

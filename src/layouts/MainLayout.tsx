@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AlertComponent } from '../components/AlertComponent'
 import { useAccount } from '../hooks/useAccount'
+import { useCheckAccess } from '../hooks/useCheckAccess'
 import { useRoute } from '../hooks/useRoute'
 import { useAppSelector } from '../store/hooks'
+import AlertsView from './AlertsView'
+import LoaderView from './LoaderView'
 
 export type ILayoutVariant = 'primary' | 'secondary' | 'danger'
 export type IAlignActions = 'center' | 'start' | 'end' | 'around'
@@ -10,29 +13,33 @@ export interface MainLayoutProps {
   children: React.ReactNode
 }
 const MainLayoutHOC = (props: MainLayoutProps) => {
-  const loader = useAppSelector((state) => state.loader.loader)
-  const alertList = useAppSelector((state) => state.alerts.alertList)
-  const {isLoggedIn} = useAccount()
-  const {
-    isLoginRoute,
-    redirectToLoginPage,
-  } = useRoute()
+  const { isLoading } = useCheckAccess()
+  const { redirectToLoginPage, redirectToInitialPage, is404Page } = useRoute()
+  const { isLoggedIn } = useAccount()
 
-  if(!isLoggedIn && !isLoginRoute) {
-    redirectToLoginPage()
-  }
+  useEffect(() => {
+    if (isLoggedIn) {
+      redirectToInitialPage()
+    } else {
+      redirectToLoginPage()
+    }
+  }, [isLoggedIn])
 
-  return (
+  return isLoading ? (
+    isLoggedIn && !is404Page ? (
     <main>
-      {props.children}
-      {
-        alertList.map((alert, index) => (
-          <AlertComponent key={index} icon={'EXCLAMATION'} alert={alert} />
-        )
-        )
-      }
-      {loader && <div className="loader" />}
+      {props.children}  
+      <AlertsView />
     </main>
+    ) :
+    (
+      <main>
+        {props.children}
+        <AlertsView />
+      </main>
+    )
+  ) : (
+    <LoaderView />
   )
 }
 

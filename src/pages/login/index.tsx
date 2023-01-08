@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { PageLayout } from '../../layouts/PageLayout'
 import { useLoginMutation } from '../../store/api/loginApi'
 import { setAccountToken, setAccountUser } from '../../store/slices/accountSlice'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { useAppDispatch } from '../../store/hooks'
 import Head from 'next/head'
 
 const Login: NextPage = () => {

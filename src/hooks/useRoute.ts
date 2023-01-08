@@ -6,9 +6,11 @@ export const useRoute = () => {
   const router = useRouter()
 
   const redirectToLoginPage = async () =>
-    await router.push(appNavigation.login)
+    await router.push(appNavigation.login.href)
   const haveAccesToThisRoute = (roles: IRoleType[], userRoles: IRoleType[]) =>
     !!roles?.filter((element) => userRoles.includes(element)).length
+  const redirectToInitialPage = async () =>
+    await router.push(appNavigation.courses.href)
 
   return {
     currentRoute: router.asPath,
@@ -17,5 +19,6 @@ export const useRoute = () => {
     isLoginRoute: ['/login'].includes(router.pathname),
     redirectToLoginPage,
     haveAccesToThisRoute,
+    redirectToInitialPage,
   }
 }

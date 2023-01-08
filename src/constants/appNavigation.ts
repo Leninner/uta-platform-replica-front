@@ -3,7 +3,7 @@ import { IRoleType } from "../utils/validAccessToRoute"
 export interface IAppNavigationItem {
   name: string
   title?: string
-  href?: string
+  href: string
   urlReference?: string
   roleControl?: IRoleType[]
   customHeaderRight?: React.ReactElement
