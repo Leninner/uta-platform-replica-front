@@ -1,0 +1,11 @@
+#__next {
+  width: 100%;
+  overflow-x: hidden;
+  min-height: 100%;
+  .main-layout {
+    position: relative;
+    min-height: 100vh;
+    left: 0;
+    // @include transition(all 0.4s);
+  }
+}

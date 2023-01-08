@@ -1,0 +1,28 @@
+.dashboard-layout {
+  @apply relative transform transition-all sm:w-full;
+
+  .body{
+      @apply mt-2 overflow-auto flex;
+      max-height: 85%;
+  }
+
+  .footer-actions {
+      @apply mt-2 flex flex-row gap-4 px-1;
+
+      &.end {
+          @apply justify-end;
+      }
+
+      &.start {
+          @apply justify-start;
+      }
+
+      &.center {
+          @apply justify-center;
+      }
+
+      &.around {
+          @apply justify-around;
+      }
+  }
+}

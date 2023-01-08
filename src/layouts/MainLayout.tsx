@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
-import { AlertComponent } from '../components/AlertComponent'
 import { useAccount } from '../hooks/useAccount'
-import { useCheckAccess } from '../hooks/useCheckAccess'
 import { useRoute } from '../hooks/useRoute'
 import AlertsView from './AlertsView'
 import { DashboardLayout } from './DashboardLayout'
 import LoaderView from './LoaderView'
+import SideNav from './SideNav'
 
 export type ILayoutVariant = 'primary' | 'secondary' | 'danger'
 export type IAlignActions = 'center' | 'start' | 'end' | 'around'
@@ -26,11 +25,14 @@ const MainLayoutHOC = (props: MainLayoutProps) => {
 
   return isLoggedIn && !is404Page ? (
     (
-      <main>
+      <main className='main-layout flex-row'>
         <DashboardLayout>
           <DashboardLayout.Header />
           <DashboardLayout.Body>
-            {props.children}
+            <SideNav />
+            <section>
+              {props.children}
+            </section>
           </DashboardLayout.Body>
           <DashboardLayout.Footer>
             <div className="footer-actions center">

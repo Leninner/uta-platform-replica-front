@@ -5,6 +5,7 @@
 
 // Variables
 @import "./config/variables";
+@import "./config/mainLayout";
 
 // Containers
 @import './containers/modalContainer';
@@ -13,6 +14,8 @@
 @import './layouts/modalLayout';
 @import "./layouts/loaderView";
 @import "./layouts/courseListView";
+@import "./layouts/dashboardLayout";
+@import "./layouts/sideNav";
 
 // Components
 @import './components/button';
