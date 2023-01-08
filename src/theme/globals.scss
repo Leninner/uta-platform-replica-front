@@ -12,9 +12,11 @@
 // Layouts
 @import './layouts/modalLayout';
 @import "./layouts/loaderView";
+@import "./layouts/courseListView";
 
 // Components
 @import './components/button';
 @import './components/inputTextComponent';
 @import "./components/dropDownComponent";
 @import "./components/alert";
+@import "./components/courseComponent";

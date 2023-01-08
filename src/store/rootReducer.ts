@@ -4,6 +4,7 @@ import counterReducer from './slices/counterSlice'
 import accountReducer from './slices/accountSlice'
 import uiReducer from './slices/uiSlice'
 import modalReducer from './slices/modalSlice'
+import coursesReducer from './slices/coursesSlice'
 
 export const rootReducer = {
   loader: loaderReducer,
@@ -12,4 +13,5 @@ export const rootReducer = {
   modal: modalReducer,
   account: accountReducer,
   ui: uiReducer,
+  courses: coursesReducer
 }

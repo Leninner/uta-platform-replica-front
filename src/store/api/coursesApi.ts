@@ -1,9 +1,5 @@
+import { AlertTypes } from '../slices/alertSlice'
 import { rootApi } from './rootApi'
-
-export interface IUserInfoLogin {
-  email: string
-  password: string
-}
 
 export const coursesApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -14,8 +10,13 @@ export const coursesApi = rootApi.injectEndpoints({
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${props.token}`,
+            Authorization: `${props.token}`,
           },
+          errorMessage: {
+            value: 'Error al obtener los cursos',
+            type: AlertTypes.ERROR,
+            title: 'Api error',
+          }
         }
       },
     }),

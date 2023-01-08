@@ -91,7 +91,7 @@ export const axiosBaseQuery =
     const headers = {} as { [key in string]: string }
 
     if (token) {
-      headers['Authorization'] = `Bearer ${token}`
+      headers['Authorization'] = `${token}`
     }
 
     const requestHeaders = prepareExtraHeaders

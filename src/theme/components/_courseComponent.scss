@@ -1,0 +1,23 @@
+.course {
+  @apply w-[300px] max-h-fit m-2 bg-white border border-gray-200;
+
+  .image {
+    @apply w-[300px] h-[100px];
+
+    & > img {
+      @apply w-full h-full object-cover;
+    }
+  }
+
+  .summary {
+    @apply p-2;
+
+    .semester {
+      @apply text-sm text-gray-500;
+    }
+  
+    .name {
+      @apply text-base font-normal text-gray-800;
+    }
+  }
+}

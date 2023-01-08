@@ -1,20 +1,19 @@
-export interface ICourseComponentProps {
-  title: string;
-  description: string;
-  duration: string;
-  teacher: string;
-  semester: string;
-}
+import { SemesterEnum } from "../enums/semesterEnum";
+import { ICourse } from "../store/slices/coursesSlice";
 
-export const CourseComponent: React.FC<ICourseComponentProps> = (props) => {
-  const { title, description, duration, teacher, semester } = props;
+export const CourseComponent = (props: ICourse) => {
+  const { name, semester, id } = props;
+
   return (
     <div className="course">
-      <div className="course__title">{title}</div>
-      <div className="course__description">{description}</div>
-      <div className="course__duration">{duration}</div>
-      <div className="course__author">{teacher}</div>
-      <div className="course__semester">{semester}</div>
+      <div className="image">
+        <img src={`https://picsum.photos/200/300?random=${id}`} alt="course" />
+      </div>
+
+      <div className="summary">
+        <div className="semester">{SemesterEnum[semester]}</div>
+        <div className="name">{name}</div>
+      </div>
     </div>
   );
 }

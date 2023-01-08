@@ -1,30 +1,32 @@
-import type { NextPage } from 'next'
-import { CourseComponent, ICourseComponentProps } from '../../components/CourseComponent'
+import { useEffect } from 'react'
+import { CourseListView } from '../../layouts/CourseListView'
+import { useGetCoursesQuery } from '../../store/api/coursesApi'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { setCourses } from '../../store/slices/coursesSlice'
 
-import { DashboardLayout } from '../../layouts/DashboardLayout'
+const Courses = () => {
+  const dispatch = useAppDispatch()
+  const courses = useAppSelector(state => state.courses.courses)
+  const { token, user: { rol, id } } = useAppSelector(state => state.account.account)
+  const { data } = useGetCoursesQuery({
+    token,
+    rol,
+    id
+  })
 
-interface ICoursesProps {
-  courses: ICourseComponentProps[]
-}
+  useEffect(() => {
+    if (data) {
+      dispatch(setCourses(data.courses))
+    }
+  }, [data])
 
-const Courses: NextPage<ICoursesProps> = (props: ICoursesProps) => {
   return (
-    <DashboardLayout>
-      <DashboardLayout.Header/>
-      <DashboardLayout.Body>
-        <div className="courses">
-          {props.courses?.map((course) => (
-            <CourseComponent {...course} />
-          ))}
-        </div>
-      </DashboardLayout.Body>
-      <DashboardLayout.Footer>
-        <div className="footer-actions center">
-          <button className="btn btn-primary">Add Course</button>
-        </div>
-      </DashboardLayout.Footer>
-    </DashboardLayout>
-   
+    <>
+      <span>Cursos a los que se ha accedido recientemente</span>
+      <CourseListView courses={courses} />
+      <span>Vista general del curso</span>
+      <CourseListView courses={courses} />
+    </>
   )
 }
 
