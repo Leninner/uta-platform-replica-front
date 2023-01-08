@@ -2,7 +2,7 @@ import { Dispatch, PayloadAction } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
 
 import { HTTP_RESPONSE_CODE, API_ERRORS } from '@/constants/apiErrors'
-import { IAlert, removeAlertItem, addAlertItem } from '../slices/alertSlice'
+import { IAlert, removeAlertItem, addAlertItem, AlertTypes } from '../slices/alertSlice'
 
 interface IDispatchErrosMessageProps {
   errorStatus: number | undefined
@@ -53,7 +53,7 @@ const dispatchErrorMessage = ({
       return dispatch(
         errorAction({
           title: API_ERRORS.ERROR_404,
-          type: 'WARNING',
+          type: AlertTypes.WARNING,
           value: '',
         })
       )
@@ -62,7 +62,7 @@ const dispatchErrorMessage = ({
       return dispatch(
         errorAction({
           title: API_ERRORS.ERROR_401,
-          type: 'WARNING',
+          type: AlertTypes.WARNING,
           value: '',
         })
       )
@@ -70,15 +70,22 @@ const dispatchErrorMessage = ({
       return dispatch(
         errorAction({
           title: API_ERRORS.ERROR_500,
-          type: 'DANGER',
+          type: AlertTypes.ERROR,
           value: '',
         })
       )
+    case HTTP_RESPONSE_CODE.BAD_REQUEST_400:
+      return dispatch(
+        errorAction({
+          title: API_ERRORS.ERROR_400,
+          type: AlertTypes.ERROR,
+          value: '',
+        }))
     default:
       return dispatch(
         errorAction({
           title: 'Api Error',
-          type: 'DANGER',
+          type: AlertTypes.ERROR,
           value: '',
         })
       )
@@ -93,6 +100,7 @@ export const handleErrors = ({
   errorMessage,
 }: IHandleErrorsProps) => {
   const apiErrorMessage = errors.response?.data?.message
+  const apiErrorCode = errors.response?.status
 
   if (extraErrorsAction) {
     dispatch(extraErrorsAction(errors.response?.data))
@@ -101,7 +109,7 @@ export const handleErrors = ({
     return null
   }
   dispatchErrorMessage({
-    errorStatus: errors?.response?.status,
+    errorStatus: apiErrorCode,
     isRemove: false,
     dispatch,
     apiErrorMessage,
@@ -111,7 +119,7 @@ export const handleErrors = ({
   const ALERT_ACTIVE_TIME = 3000
   setTimeout(() => {
     dispatchErrorMessage({
-      errorStatus: errors?.response?.status,
+      errorStatus: apiErrorCode,
       isRemove: true,
       dispatch,
       apiErrorMessage,

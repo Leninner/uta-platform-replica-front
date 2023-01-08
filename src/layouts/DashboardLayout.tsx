@@ -155,7 +155,7 @@ const Header = () => {
   const { isLoggedIn } = useAccount()
 
   useEffect(() => {
-    if(!isLoggedIn) router.push('/login')
+    if(!isLoggedIn) router.replace('/login')
   }, [isLoggedIn])
 
   const userInfo = useSelector((state: IRootState) => state.account.account.user)

@@ -1,3 +1,4 @@
+import { AlertTypes } from '../slices/alertSlice'
 import { rootApi } from './rootApi'
 
 export interface IUserInfoLogin {
@@ -12,6 +13,16 @@ export const loginApi = rootApi.injectEndpoints({
         url: () => `auth/login`,
         method: 'POST',
         data: userInfo,
+        errorMessage: {
+          value: 'Email o contraseña incorrectos',
+          type: AlertTypes.ERROR,
+          title: 'Error de login',
+        },
+        successMessage: {
+          value: 'Login correcto',
+          type: AlertTypes.SUCCESS,
+          title: 'Login correcto',
+        },
       }),
     }),
   }),

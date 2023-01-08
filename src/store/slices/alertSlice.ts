@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction, SliceCaseReducers } from '@reduxjs/toolkit'
 
-export type AlertTypes = 'SUCCESS' | 'DANGER' | 'WARNING' | 'INFO'
+export enum AlertTypes {
+  SUCCESS = 'SUCCESS',
+  WARNING = 'WARNING',
+  ERROR = 'ERROR',
+  INFO = 'INFO',
+}
 
 export interface IAlert {
   value: string

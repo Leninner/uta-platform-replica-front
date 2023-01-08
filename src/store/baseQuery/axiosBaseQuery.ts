@@ -53,6 +53,7 @@ const dispatchSuccessActions = (successActionsProps: ISuccessActionsProps) => {
   }
 
   if (successMessage) {
+    console.log('successMessage', successMessage)
     api.dispatch(addAlertItem(successMessage))
     setTimeout(() => {
       api.dispatch(removeAlertItem(successMessage))
