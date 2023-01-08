@@ -1,0 +1,107 @@
+$loader-background-bg: #fff;
+$loader-background-bg-opacity: 0.5;
+$loader-background-primary: #3434ff;
+$loader-background-success: #45874f;
+$loader-background-danger: #3434ff;
+$loader-background-warning: #45874f;
+$loader-background-containerDimentions: 60px;
+$loader-background-shapeDimentions: 20px;
+$loader-background-amount: 10px;
+
+.loader-view {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: rgba($loader-background-bg, $loader-background-bg-opacity);
+  opacity: 0;
+  &.alert-enter-active {
+    opacity: 1;
+  }
+  &.alert-enter-done {
+    opacity: 1;
+  }
+  &.alert-exit-active {
+    opacity: 0;
+  }
+  &.alert-exit-done {
+    display: none;
+  }
+  .container {
+    position: relative;
+    width: $loader-background-containerDimentions;
+    height: $loader-background-containerDimentions;
+    animation: rotation 1s infinite;
+    .shape {
+      border-radius: $loader-background-containerDimentions/2;
+      position: absolute;
+      width: $loader-background-shapeDimentions;
+      height: $loader-background-shapeDimentions;
+      &.shape-1 {
+        left: 0;
+        background-color: $loader-background-primary;
+      }
+      &.shape-2 {
+        right: 0;
+        background-color: $loader-background-success;
+      }
+      &.shape-3 {
+        bottom: 0;
+        background-color: $loader-background-warning;
+      }
+      &.shape-4 {
+        bottom: 0;
+        right: 0;
+        background-color: $loader-background-danger;
+      }
+    }
+    @for $i from 1 through 4 {
+      .shape-#{$i} {
+        animation: shape#{$i} 0.5s infinite alternate;
+      }
+    }
+  }
+
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @mixin shapeTranslate($index, $tx, $ty) {
+    @keyframes shape#{$index} {
+      from {
+        transform: translate(0, 0);
+      }
+      to {
+        transform: translate($tx, $ty);
+      }
+    }
+  }
+  @include shapeTranslate(
+    1,
+    $loader-background-amount,
+    $loader-background-amount
+  );
+  @include shapeTranslate(
+    2,
+    -$loader-background-amount,
+    $loader-background-amount
+  );
+  @include shapeTranslate(
+    3,
+    $loader-background-amount,
+    -$loader-background-amount
+  );
+  @include shapeTranslate(
+    4,
+    -$loader-background-amount,
+    -$loader-background-amount
+  );
+}
